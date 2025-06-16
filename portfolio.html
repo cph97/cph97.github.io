@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Costas Philippou | 3D Artist Portfolio</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Consolas, monospace;
+      background-color: #000;
+      color: #f0f0f0;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body {
+      position: relative;
+      z-index: 1;
+    }
+    main {
+      flex: 1;
+      z-index: 2;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    header, nav {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(17, 17, 17, 0.85);
+      border-radius: 8px;
+      margin: 20px auto 10px;
+      max-width: 600px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+    header .btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 8px 18px;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+    nav a {
+      color: #ccc;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 40px;
+      max-width: 960px;
+      margin: auto;
+    }
+    .project {
+      background: #0a0a0a;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      border-radius: 8px;
+      border: none;
+    }
+    h3 {
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+    .project p {
+      font-size: 0.88em;
+      line-height: 1.4em;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(17, 17, 17, 1);
+      font-size: 0.85em;
+      color: #777;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="asciiCanvas"></canvas>
+  <main>
+    <header>
+      <h1>Costas Philippou</h1>
+      <p>3D Artist | Audiovisual Experiments & Spatial Compositions</p>
+      <a href="assets/Costas_Philippou_cv.pdf" class="btn" download>Download CV</a>
+    </header>
+
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+  </nav>
+
+  <div class="section-title">Pointcloud & 3D Constructions</div>
+  <section class="gallery">
+    <!-- Εδώ θα μπουν τα σχετικά έργα -->
+     <h2>Pointcloud & 3D Constructions</h2>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/UPrkRNiEatI"></iframe>
+      <div class="description">This video presents a pointcloud composition of various plant structures. The pointclouds were created through photogrammetry and assembled in Blender into a single spatial composition. The animation was produced in TouchDesigner, using real-time point rendering and motion controls.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/26TdA7FQcUw"></iframe>
+      <div class="description">This video presents a pointcloud scan of a cactus structure, where each point is represented by an ASCII character. The animation reacts in real-time to audio from Sonic Pi and explores the relationship between organic form and symbolic behavior.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/Yu3UTFRjRh8"></iframe>
+      <div class="description">Pointclouds from different architectural monuments, combined at varying scales. The work explores visual overlap between historical sites.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/S5DxiRgGvgU"></iframe>
+      <div class="description">Audio-reactive transformation of monument pointclouds using TouchDesigner, dissolving structures into abstract motion.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/8v1mF1fAnIM"></iframe>
+      <div class="description">Pointcloud scan of an interior space with real-time noise-based deformation in TouchDesigner.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/D1hHsj_Hk3Y"></iframe>
+      <div class="description">Mirrored pointcloud of a plant in Blender, animated with audio-reactive behavior in TouchDesigner.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/CqBiUwe7BUg"></iframe>
+      <div class="description">Pointcloud scan of a plant, mirrored for symmetry and animated with audio inputs in TouchDesigner.</div>
+    </div>
+  </section>
+
+  <div class="section-title">Data Visualisation (Proteins)</div>
+  <section class="gallery">
+    <!-- Εδώ θα μπουν τα protein visualization projects -->
+     <h2>Data Visualisation (Proteins)</h2>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/W9Cu1GoPUl0"></iframe>
+      <div class="description">Mirrored visualization of the Plasmodium protein structure 6E10, sonified using atomic coordinates and Pure Data.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/XyhiULX0FFI"></iframe>
+      <div class="description">OpenMM simulation of SARS-CoV-2 spike protein (6YI3), with coordinates mapped to audio frequencies in Pure Data.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/z0yVMgFeRuA"></iframe>
+      <div class="description">PointNetGAN-generated SARS-CoV-2 protein form, visualized with wave deformation in Blender. A speculative morphology shaped by learned data.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/iglbYSR9opE"></iframe>
+      <div class="description">Synthetic protein shape generated from HIV datasets using PointNetGAN, representing an abstract latent topology.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/hAWHxwFpzG4"></iframe>
+      <div class="description">GAN-generated protein structure trained on Hepatitis C virus data. A generative abstraction visualized in Blender.</div>
+    </div>
+  </section>
+
+  <div class="section-title">Realtime / Game Engine Works</div>
+  <section class="gallery">
+    <!-- Εδώ θα μπουν τα Unreal Engine & Realtime works -->
+     <h2>Realtime / Game Engine Works</h2>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/30pDG8sezq8"></iframe>
+      <div class="description">Single-shot Unreal Engine walkthrough in a gothic space with proximity-reactive lighting and stylized humanoids.</div>
+    </div>
+    <div class="project">
+      <iframe src="https://www.youtube.com/embed/P4-yN_MvVBM"></iframe>
+      <div class="description">Real-time landscape in UE5 with randomized procedural weather. The terrain was generated from EEG data of the artist using Gaia.</div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Costas Philippou. All rights reserved.
+  </footer>
+
+  <script>
+    const canvas = document.getElementById("asciiCanvas");
+    const ctx = canvas.getContext("2d");
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const gridSize = 20;
+    const chars = "@#*+=-:.";
+    let cols = Math.floor(width / gridSize);
+    let rows = Math.floor(height / gridSize);
+    let mouse = { x: -1000, y: -1000 };
+    let asciiGrid = [];
+    let frame = 0;
+
+    for (let y = 0; y < rows; y++) {
+      asciiGrid[y] = [];
+      for (let x = 0; x < cols; x++) {
+        asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
+      }
+    }
+
+    document.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const px = x * gridSize;
+          const noise = Math.sin((x + frame * 0.02) * 0.3) + Math.cos((y + frame * 0.02) * 0.3);
+          const n = (Math.sin(x * 0.3 + frame * 0.03) + Math.cos(y * 0.3 + frame * 0.03)) * 0.5;
+          const py = y * gridSize + Math.sin((frame + x * 2 + y * 2) / 8) * 4 + noise * 3 + n * 3;
+          const dx = px - mouse.x;
+          const dy = py - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const inside = dist < 40;
+          const scale = inside ? 1.3 : 1 + 0.25 * Math.sin(frame / 12 + x + y);
+          const fontSize = gridSize * scale * 0.45;
+
+          if (inside) {
+            asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
+          }
+
+          ctx.font = `${fontSize}px Consolas`;
+          ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+          ctx.fillText(asciiGrid[y][x], px, py);
+        }
+      }
+
+      frame++;
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    window.addEventListener("resize", () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      cols = Math.floor(width / gridSize);
+      rows = Math.floor(height / gridSize);
+      asciiGrid = [];
+      for (let y = 0; y < rows; y++) {
+        asciiGrid[y] = [];
+        for (let x = 0; x < cols; x++) {
+          asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
