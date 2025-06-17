@@ -23,6 +23,12 @@
     main {
       flex: 1;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
     }
     canvas {
       position: fixed;
@@ -34,15 +40,16 @@
     }
     header, nav {
       text-align: center;
-      padding: 20px;
+      padding: 10px;
       background-color: rgba(17, 17, 17, 0.85);
-      border-radius: 8px;
-      margin: 20px auto 10px;
-      max-width: 600px;
+      border-radius: 1px;
+      margin: 10px auto;
+      max-width: 1000px;
     }
     header h1 {
-      font-size: 2.5em;
+      font-size: 1.5em;
       margin: 0;
+      
     }
     header p {
       font-size: 1.1em;
@@ -58,51 +65,66 @@
       border-radius: 5px;
       font-size: 0.9em;
     }
+    nav {
+      margin-top: 10px;
+    }
     nav a {
       color: #ccc;
       margin: 0 15px;
       text-decoration: none;
       font-size: 1em;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      padding: 40px;
-      max-width: 960px;
-      margin: auto;
-    }
-    .project {
-      background: #0a0a0a;
+    .about {
+      max-width: 1000px;
+      margin: 30px auto;
+      font-size: 0.95em;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.4);
       padding: 20px;
-      border-radius: 10px;
-    }
-    iframe {
-      width: 100%;
-      height: 315px;
-      border-radius: 8px;
-      border: none;
-    }
-    h3 {
-      margin-top: 15px;
-      font-size: 1.2em;
-    }
-    .project p {
-      font-size: 0.88em;
-      line-height: 1.4em;
-      color: #ccc;
+      border-radius: 2px;
     }
     footer {
+      position: relative;
+      z-index: 3;
       text-align: center;
       padding: 20px;
-      background: rgba(17, 17, 17, 1);
+      background: rgba(17, 17, 17, 0.85);
       font-size: 0.85em;
       color: #777;
       margin-top: auto;
     }
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.35;
+      filter: blur(1px) brightness(0.75) contrast(1.2) saturate(1.5);
+    }
+
+    .enter-prompt {
+  margin-top: 40px;
+  font-size: 1em;
+  color: #ccc;
+  opacity: 0.5;
+  animation: blink 1.5s infinite;
+  font-family: Consolas, monospace;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
   </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="assets/background.mp4" type="video/mp4">
+  </video>
   <canvas id="asciiCanvas"></canvas>
   <main>
     <header>
@@ -110,21 +132,21 @@
       <p>3D Artist | Audiovisual Experiments & Spatial Compositions</p>
       <a href="assets/Costas_Philippou_cv.pdf" class="btn" download>Download CV</a>
     </header>
-
     <nav>
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
     </nav>
-
-    <section class="gallery">
-      <p>Welcome. Please explore the portfolio via the link above.</p>
+    <section class="about">
+      <p>Costas Philippou is a 3D artist exploring the intersection of spatial composition, data-driven design, and real-time audiovisual systems. His work spans photogrammetry-based pointclouds, experimental protein visualizations, and Unreal Engine environments, merging scientific structures with artistic abstraction. Through custom pipelines and generative techniques, he creates immersive experiences that reimagine organic and synthetic forms in constant transformation.</p>
     </section>
-  </main>
+    <div class="enter-prompt">
+  <pre>> press [Enter] to explore</pre>
+</div>
 
+  </main>
   <footer>
     &copy; 2025 Costas Philippou. All rights reserved.
   </footer>
-
   <script>
     const canvas = document.getElementById("asciiCanvas");
     const ctx = canvas.getContext("2d");
@@ -133,54 +155,52 @@
     canvas.width = width;
     canvas.height = height;
 
-    const gridSize = 20;
-    const chars = "@#*+=-:.";
-    let cols = Math.floor(width / gridSize);
-    let rows = Math.floor(height / gridSize);
+    const gridSize = 10;
+    const chars = "@#*+=-:.1234567890";
+    const bgVideo = document.getElementById("bgVideo");
+    const offscreen = document.createElement("canvas");
+    const offCtx = offscreen.getContext("2d");
     let mouse = { x: -1000, y: -1000 };
-    let asciiGrid = [];
-    let frame = 0;
-
-    for (let y = 0; y < rows; y++) {
-      asciiGrid[y] = [];
-      for (let x = 0; x < cols; x++) {
-        asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-      }
-    }
 
     document.addEventListener("mousemove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     });
 
+    function invertColor(r, g, b) {
+      return `rgb(${255 - r}, ${255 - g}, ${255 - b})`;
+    }
+    
+
     function draw() {
       ctx.clearRect(0, 0, width, height);
+      offscreen.width = width;
+      offscreen.height = height;
+      offCtx.drawImage(bgVideo, 0, 0, width, height);
+      const imageData = offCtx.getImageData(0, 0, width, height).data;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const px = x * gridSize;
-          const noise = Math.sin((x + frame * 0.02) * 0.3) + Math.cos((y + frame * 0.02) * 0.3);
-          const py = y * gridSize + Math.sin((frame + x * 2 + y * 2) / 8) * 4 + noise * 3; // Distorted wave + noise
-          const dx = px - mouse.x;
-          const dy = py - mouse.y;
+      for (let y = 0; y < height; y += gridSize) {
+        for (let x = 0; x < width; x += gridSize) {
+          const index = (Math.floor(y) * width + Math.floor(x)) * 4;
+          const r = imageData[index];
+          const g = imageData[index + 1];
+          const b = imageData[index + 2];
+          const brightness = (r + g + b) / 3;
+          const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
+          const char = chars[charIndex];
+          const dx = x - mouse.x;
+          const dy = y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const inside = dist < 40;
-          const scale = inside ? 1.3 : 1 + 0.25 * Math.sin(frame / 12 + x + y);
-          const fontSize = gridSize * scale * 0.45;
-
-          if (inside) {
-            asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-          }
-
-          ctx.font = `${fontSize}px Consolas`;
-          ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-          ctx.fillText(asciiGrid[y][x], px, py);
+          const size = dist < 40 ? 16 : 12;
+          ctx.font = `${size}px Consolas`;
+          ctx.fillStyle = invertColor(r, g, b);
+          ctx.globalAlpha = dist < 40 ? 0.35 : 0.15;
+          ctx.fillText(char, x, y);
         }
       }
 
-      frame++;
       requestAnimationFrame(draw);
     }
 
@@ -191,16 +211,15 @@
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      cols = Math.floor(width / gridSize);
-      rows = Math.floor(height / gridSize);
-      asciiGrid = [];
-      for (let y = 0; y < rows; y++) {
-        asciiGrid[y] = [];
-        for (let x = 0; x < cols; x++) {
-          asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-        }
-      }
     });
+
   </script>
+  <script>
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      window.location.href = "portfolio.html";
+    }
+  });
+</script>
 </body>
 </html>

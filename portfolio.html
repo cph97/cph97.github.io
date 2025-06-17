@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Costas Philippou | 3D Artist Portfolio</title>
+  <title>Portfolio</title>
   <style>
     html, body {
       margin: 0;
@@ -23,6 +23,7 @@
     main {
       flex: 1;
       z-index: 2;
+      padding: 40px;
     }
     canvas {
       position: fixed;
@@ -30,33 +31,24 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: 1;
+      pointer-events: none;
     }
     header, nav {
       text-align: center;
-      padding: 20px;
+      padding: 10px;
       background-color: rgba(17, 17, 17, 0.85);
-      border-radius: 8px;
-      margin: 20px auto 10px;
-      max-width: 600px;
+      border-radius: 1px;
+      margin: 10px auto;
+      max-width: 800px;
+      z-index: 2;
     }
     header h1 {
-      font-size: 2.5em;
+      font-size: 1.2em;
       margin: 0;
     }
-    header p {
-      font-size: 1.1em;
+    nav {
       margin-top: 10px;
-    }
-    header .btn {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 8px 18px;
-      background: #333;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 0.9em;
     }
     nav a {
       color: #ccc;
@@ -65,59 +57,94 @@
       font-size: 1em;
     }
     .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      padding: 40px;
-      max-width: 960px;
-      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 30px;
+      background-color: rgba(0, 0, 0, 0.35);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 60px;
+    }
+    .gallery h2 {
+      font-size: 1em;
+      margin-bottom: 20px;
+      transform: translate(90px, 0px);
     }
     .project {
-      background: #0a0a0a;
-      padding: 20px;
-      border-radius: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-left: 80px;
+      gap: 80px;
     }
     iframe {
       width: 100%;
-      height: 315px;
-      border-radius: 8px;
+      max-width: 640px;
+      height: 384px;
       border: none;
+      flex-shrink: 0;
     }
-    h3 {
-      margin-top: 15px;
-      font-size: 1.2em;
+    .description {
+      max-width: 500px;
+      text-align: right;
+      font-size: 0.9em;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 1px;
+      /*transform: translateY(100px);*/
+      transform: translate(800px, 100px);
+      
     }
-    .project p {
-      font-size: 0.88em;
-      line-height: 1.4em;
-      color: #ccc;
+    @media (max-width: 900px) {
+      .project {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        gap: 20px;
+      }
+      .description {
+        text-align: center;
+        transform: none;
+      }
+    }
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.35;
+      filter: blur(1px) brightness(0.75) contrast(1.2) saturate(1.5);
     }
     footer {
       text-align: center;
       padding: 20px;
-      background: rgba(17, 17, 17, 1);
+      background: rgba(17, 17, 17, 0.85);
       font-size: 0.85em;
       color: #777;
       margin-top: auto;
+      z-index: 3;
     }
   </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="assets/background.mp4" type="video/mp4">
+  </video>
   <canvas id="asciiCanvas"></canvas>
   <main>
     <header>
-      <h1>Costas Philippou</h1>
-      <p>3D Artist | Audiovisual Experiments & Spatial Compositions</p>
-      <a href="assets/Costas_Philippou_cv.pdf" class="btn" download>Download CV</a>
+      <h1>Portfolio</h1>
     </header>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
 
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-  </nav>
-
-  <div class="section-title">Pointcloud & 3D Constructions</div>
+  <div class="section-title"></div>
   <section class="gallery">
     <!-- Εδώ θα μπουν τα σχετικά έργα -->
      <h2>Pointcloud & 3D Constructions</h2>
@@ -151,10 +178,10 @@
     </div>
   </section>
 
-  <div class="section-title">Data Visualisation (Proteins)</div>
+  <div class="section-title"></div>
   <section class="gallery">
     <!-- Εδώ θα μπουν τα protein visualization projects -->
-     <h2>Data Visualisation (Proteins)</h2>
+     <h2>Data Visualisation</h2>
     <div class="project">
       <iframe src="https://www.youtube.com/embed/W9Cu1GoPUl0"></iframe>
       <div class="description">Mirrored visualization of the Plasmodium protein structure 6E10, sonified using atomic coordinates and Pure Data.</div>
@@ -177,10 +204,10 @@
     </div>
   </section>
 
-  <div class="section-title">Realtime / Game Engine Works</div>
+  <div class="section-title"></div>
   <section class="gallery">
     <!-- Εδώ θα μπουν τα Unreal Engine & Realtime works -->
-     <h2>Realtime / Game Engine Works</h2>
+     <h2>Realtime Experience</h2>
     <div class="project">
       <iframe src="https://www.youtube.com/embed/30pDG8sezq8"></iframe>
       <div class="description">Single-shot Unreal Engine walkthrough in a gothic space with proximity-reactive lighting and stylized humanoids.</div>
@@ -191,6 +218,7 @@
     </div>
   </section>
 
+ </main>
   <footer>
     &copy; 2025 Costas Philippou. All rights reserved.
   </footer>
@@ -203,55 +231,51 @@
     canvas.width = width;
     canvas.height = height;
 
-    const gridSize = 20;
-    const chars = "@#*+=-:.";
-    let cols = Math.floor(width / gridSize);
-    let rows = Math.floor(height / gridSize);
+    const gridSize = 10;
+    const chars = "@#*+=-:.1234567890";
+    const bgVideo = document.getElementById("bgVideo");
+    const offscreen = document.createElement("canvas");
+    const offCtx = offscreen.getContext("2d");
     let mouse = { x: -1000, y: -1000 };
-    let asciiGrid = [];
-    let frame = 0;
-
-    for (let y = 0; y < rows; y++) {
-      asciiGrid[y] = [];
-      for (let x = 0; x < cols; x++) {
-        asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-      }
-    }
 
     document.addEventListener("mousemove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     });
 
+    function invertColor(r, g, b) {
+      return `rgb(${255 - r}, ${255 - g}, ${255 - b})`;
+    }
+
     function draw() {
       ctx.clearRect(0, 0, width, height);
+      offscreen.width = width;
+      offscreen.height = height;
+      offCtx.drawImage(bgVideo, 0, 0, width, height);
+      const imageData = offCtx.getImageData(0, 0, width, height).data;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const px = x * gridSize;
-          const noise = Math.sin((x + frame * 0.02) * 0.3) + Math.cos((y + frame * 0.02) * 0.3);
-          const n = (Math.sin(x * 0.3 + frame * 0.03) + Math.cos(y * 0.3 + frame * 0.03)) * 0.5;
-          const py = y * gridSize + Math.sin((frame + x * 2 + y * 2) / 8) * 4 + noise * 3 + n * 3;
-          const dx = px - mouse.x;
-          const dy = py - mouse.y;
+      for (let y = 0; y < height; y += gridSize) {
+        for (let x = 0; x < width; x += gridSize) {
+          const index = (Math.floor(y) * width + Math.floor(x)) * 4;
+          const r = imageData[index];
+          const g = imageData[index + 1];
+          const b = imageData[index + 2];
+          const brightness = (r + g + b) / 3;
+          const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
+          const char = chars[charIndex];
+          const dx = x - mouse.x;
+          const dy = y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const inside = dist < 40;
-          const scale = inside ? 1.3 : 1 + 0.25 * Math.sin(frame / 12 + x + y);
-          const fontSize = gridSize * scale * 0.45;
-
-          if (inside) {
-            asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-          }
-
-          ctx.font = `${fontSize}px Consolas`;
-          ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-          ctx.fillText(asciiGrid[y][x], px, py);
+          const size = dist < 40 ? 16 : 12;
+          ctx.font = `${size}px Consolas`;
+          ctx.fillStyle = invertColor(r, g, b);
+          ctx.globalAlpha = dist < 40 ? 0.35 : 0.15;
+          ctx.fillText(char, x, y);
         }
       }
 
-      frame++;
       requestAnimationFrame(draw);
     }
 
@@ -262,17 +286,15 @@
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      cols = Math.floor(width / gridSize);
-      rows = Math.floor(height / gridSize);
-      asciiGrid = [];
-      for (let y = 0; y < rows; y++) {
-        asciiGrid[y] = [];
-        for (let x = 0; x < cols; x++) {
-          asciiGrid[y][x] = chars[Math.floor(Math.random() * chars.length)];
-        }
-      }
     });
   </script>
 
+  <script>
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        window.location.href = "portfolio.html";
+      }
+    });
+  </script>
 </body>
 </html>
